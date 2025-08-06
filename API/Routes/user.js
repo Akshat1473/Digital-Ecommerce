@@ -10,6 +10,6 @@ router.post('/register',register)
 
 router.post('/login',login)
 
-router.get('/users',users)
+router.get('/all',users)
 
 export default router
