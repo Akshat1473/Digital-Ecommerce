@@ -4,7 +4,7 @@ import {Cart} from "../Models/Cart.js";
 // add to cart
 export const addToCart=async (req,res)=>{
       const {productId,title,price,qty,imgSrc}=req.body;
-      const userId= "68918d7711198f217661ad96";
+      const userId= req.user;
  
       let cart=await Cart.findOne({userId});
       if(!cart){
@@ -28,7 +28,7 @@ export const addToCart=async (req,res)=>{
 
 // get user cart
 export const userCart=async(req,res)=>{
-      const userId="68918d7711198f217661ad96"
+      const userId=req.user
       
       let cart=await Cart.findOne({userId});
       if(!cart)return res.json({message:'Cart not found'})
@@ -39,7 +39,7 @@ export const userCart=async(req,res)=>{
 // remove product from cart
 export const removeProductFromCart=async(req,res)=>{
       const productId=req.params.productId;
-      const userId="68918d7711198f217661ad96";
+      const userId=req.user;
 
       let cart=await Cart.findOne({userId});
 
@@ -56,7 +56,7 @@ export const removeProductFromCart=async(req,res)=>{
 
 // Delete all items from cart
 export const clearCart =async(req,res)=>{
-      const userId="68918d7711198f217661ad96";
+      const userId=req.user;
 
       let cart=await Cart.findOne({userId});
 
@@ -78,7 +78,7 @@ export const clearCart =async(req,res)=>{
 export const decreaseProudctQty = async (req, res) => {
   const { productId, qty } = req.body;
 
-  const userId = "68918d7711198f217661ad96"; // Keep this if required for now
+  const userId = req.user; // Keep this if required for now
 
   let cart = await Cart.findOne({ userId });
 
@@ -109,3 +109,5 @@ export const decreaseProudctQty = async (req, res) => {
   await cart.save();
   res.json({ message: "Item quantity decreased", cart });
 };
+
+

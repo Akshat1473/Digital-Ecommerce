@@ -3,6 +3,8 @@ import mongoose from 'mongoose';
 import userRouter from './Routes/user.js'
 import productRouter from './Routes/product.js'
 import cartRouter from './Routes/cart.js'
+
+import addressRouter from './Routes/address.js'
 // import bodyParser from 'express'
 import { register } from './Controllers/user.js';
 
@@ -21,6 +23,9 @@ app.use('/api/product', productRouter)
 
 // cart router
 app.use('/api/cart',cartRouter)
+
+// address router
+app.use('/api/address',addressRouter)
 
 mongoose.connect(
     "mongodb+srv://akshat8958:V57X9GrjnGs8LBSX@cluster0.nid0vdy.mongodb.net/", { dbName: "Digital-Electronics" }
