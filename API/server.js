@@ -8,10 +8,23 @@ import addressRouter from './Routes/address.js'
 // import bodyParser from 'express'
 import { register } from './Controllers/user.js';
 
+
+import paymentRouter from './Routes/payment.js'
+import cors from 'cors';
+
 const app = express();
+
+
 
 // app.use(bodyParser.json())
 app.use(express.json());
+
+
+app.use(cors({
+    origin:true,
+    methods:["GET","POST","PUT","DELETE"],
+    credentials:true
+}))
 
 app.get('/', (req, res) => res.json({ message: 'This is home route' }))
 
@@ -27,6 +40,9 @@ app.use('/api/cart',cartRouter)
 // address router
 app.use('/api/address',addressRouter)
 
+
+// payment router
+app.use('/api/payment/',paymentRouter)
 mongoose.connect(
     "mongodb+srv://akshat8958:V57X9GrjnGs8LBSX@cluster0.nid0vdy.mongodb.net/", { dbName: "Digital-Electronics" }
 ).then(() => console.log("MongoDB Connected Successfully...!")).catch((err) =>

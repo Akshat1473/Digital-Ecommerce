@@ -56,3 +56,7 @@ export const users=async(req,res)=>{
     }
 }
 
+// get profile
+export const profile=async(req,res)=>{
+  res.json({user:req.user})
+}

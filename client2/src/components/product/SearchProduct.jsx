@@ -1,0 +1,53 @@
+
+import React, { useContext, useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
+import AppContext from '../../context/AppContext'
+import { Link } from 'react-router-dom'
+// copy related product
+const SearchProduct = ({ category }) => {
+  const { products } = useContext(AppContext)
+  const [searchProduct, setSearchProduct] = useState([])
+
+
+const {term}=useParams()
+
+  useEffect(() => {
+    
+      setSearchProduct(
+        products.filter(
+          (data) =>
+            data?.title?.toLowerCase().includes( term.toLowerCase()))
+        );
+  }, [term, products])
+
+  return (
+    <div className="m-8">
+     
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        {searchProduct?.map((product) => (
+          <div key={product._id} className="flex flex-col items-center">
+            <Link to={`/product/${product._id}`}>
+              <img
+                src={product.imgSrc}
+                alt={product.title}
+                className="w-full h-[360px] object-cover rounded-lg border-2 border-yellow-400"
+              />
+            </Link>
+
+            <h1 className="mt-2 text-center">{product.title}</h1>
+            <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md mt-2 cursor-pointer">
+              {product.price} Rs
+            </button>
+            <button className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md mt-2 cursor-pointer">
+              Add To Cart
+            </button>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+export default SearchProduct
+
