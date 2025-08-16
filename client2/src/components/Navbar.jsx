@@ -1,5 +1,7 @@
 
-// export default Navbar;
+
+
+
 import React, { useContext, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { AiOutlineShoppingCart } from "react-icons/ai";
@@ -36,7 +38,7 @@ const Navbar = () => {
   return (
     <>
       <nav className="bg-gray-900 text-white px-4 py-3 sticky top-0 z-50">
-        <ul className="flex flex-col md:flex-row items-center justify-between gap-3">
+        <ul className="flex flex-col md:flex-row items-center justify-between gap-3 w-full">
           {/* Logo */}
           <li>
             <Link to="/">
@@ -45,20 +47,20 @@ const Navbar = () => {
           </li>
 
           {/* Search */}
-          <li className="w-full md:w-auto">
+          <li className="w-full md:w-auto flex-1">
             <form onSubmit={submitHandler}>
               <input
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 type="text"
-                placeholder="search..."
-                className="w-full px-3 py-1 rounded-md text-black outline-none"
+                placeholder="Search products..."
+                className="w-full px-3 py-1 rounded-md bg-white text-black outline-none"
               />
             </form>
           </li>
 
           {/* Authenticated buttons */}
-          {isAuthenticated && (
+          {isAuthenticated ? (
             <>
               {/* Cart Button */}
               <li className="relative flex items-center">
@@ -68,22 +70,22 @@ const Navbar = () => {
                 >
                   <AiOutlineShoppingCart className="text-2xl" />
                 </Link>
-                {cart?.items?.length> 0 && (
+                {cart?.items?.length > 0 && (
                   <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">
-                    {cart?.items?.length}
+                    {cart.items.length}
                   </span>
                 )}
               </li>
 
               {/* Profile */}
-              <Link to="/profile">
-                <li>
+              <li>
+                <Link to="/profile">
                   <Button
                     label="profile"
                     className="bg-yellow-400 text-black hover:bg-yellow-500"
                   />
-                </li>
-              </Link>
+                </Link>
+              </li>
 
               {/* Logout */}
               <li>
@@ -97,33 +99,31 @@ const Navbar = () => {
                 />
               </li>
             </>
-          )}
-
-          {/* Guest buttons */}
-          {!isAuthenticated && (
+          ) : (
             <>
-              <Link to="/login">
-                <li>
+              {/* Guest buttons */}
+              <li>
+                <Link to="/login">
                   <Button
                     label="login"
                     className="bg-yellow-400 text-black hover:bg-yellow-500"
                   />
-                </li>
-              </Link>
-              <Link to="/register">
-                <li>
+                </Link>
+              </li>
+              <li>
+                <Link to="/register">
                   <Button
                     label="register"
                     className="bg-blue-500 text-white hover:bg-blue-600"
                   />
-                </li>
-              </Link>
+                </Link>
+              </li>
             </>
           )}
         </ul>
       </nav>
 
-      {/* Sub navigation */}
+      {/* Sub navigation (only on home page) */}
       {location.pathname === "/" && (
         <div className="flex flex-wrap gap-2 p-4 bg-gray-100 rounded-lg justify-center">
           {/* Category Filters */}
@@ -158,3 +158,5 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+
