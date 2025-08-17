@@ -4,7 +4,9 @@ import axios from 'axios'
 import { ToastContainer, toast, Bounce } from 'react-toastify';
 const AppState = (props) => {
 
-  const url = "http://localhost:2000/api"
+  // const url = "http://localhost:2000/api"
+  // const url=https:"https://aj-digital-ecommerce-i9gk.onrender.com/api"
+  const url="https://aj-digital-ecommerce-i9gk.onrender.com/api";
 
   const [products, setProducts] = useState([]);
   // login user k baad navbar change ho jaye
