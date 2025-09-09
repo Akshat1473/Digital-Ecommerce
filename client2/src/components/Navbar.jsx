@@ -245,7 +245,7 @@ const Navbar = () => {
               </li>
 
 
-              
+
 
               {/* Profile */}
               <li>
